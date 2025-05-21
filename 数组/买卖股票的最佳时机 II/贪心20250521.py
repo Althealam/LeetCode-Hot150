@@ -1,5 +1,5 @@
 # 时间复杂度：O(n)
-# 空间复杂度：O(1)
+# 空间复杂度：O(n)
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         res=[0]*(len(prices)-1)
