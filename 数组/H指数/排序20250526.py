@@ -1,19 +1,22 @@
-# 题意：给定一个数组，求一个最大h，使得数组中至少有h个数都大于等于h
-# 思路：创建一个长度为n+1的cnt数组，统计min(citations[i], n)的出现次数
-# 假设s为引用次数>=i的论文数，我们需要算出满足s>=i的最大的i
+# 题意：给定一个数组，求一个最大h，使得数组中至少有h个数都大于等于h（这个h是论文的引用次数）
+# 思路：将初始的H指数h设置为0，然后将引用次数排序，并且对排序后的数组从大到小遍历
+# 如果当前H指数为h并且在遍历过程中找到了当前值citations[i]>h，说明我们至少找到了一篇被引用了至少h+1次的论文，因此将现有的h+1，继续遍历直到h无法继续增大
+# 时间复杂度：O(nlogn) 排序需要nlogn
+# 空间复杂度：O(logn) 
 
-# 时间复杂度: O(n)
-# 空间复杂度: O(n)
 class Solution:
-    def hIndex(self, citations: List[int]) -> int:
+    def hIndex(self, citations):
+        sorted_citations=sorted(citations, reverse=True) # 倒叙排序，需要确保最大的元素在最前面
+        h=0
+        i=0
         n=len(citations)
-        cnt=[0]*(n+1) # 计算每个被引用次数出现的频率
-        for c in citations:
-            cnt[min(c, n)]+=1 # 被引用频率h不可以超过n
-        s=0
-        for i in range(n, -1, -1): # i=0的时候 s>=i一定成立（遍历引用次数）
-            s+=cnt[i] # 统计
-            if s>=i: # 说明有至少i篇论文的引用次数至少为i
-                return i
+        while i<n and sorted_citations[i]>h: # 如果sorted_citations[i]>h，说明目前该论文的引用次数是大于h的
+            h+=1
+            i+=1
+            print("目前遍历的论文引用次数为:",sorted_citations[i])
+            print("h:",h)
+        return h
 
-        
+citations=[3,0,6,1,5]
+sol=Solution()
+print(sol.hIndex(citations))
