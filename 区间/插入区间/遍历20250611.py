@@ -5,8 +5,6 @@
 # 3. 如果上面的情况都不满足，说明[li, ri]与S重叠，因此不用将[li, ri]加入答案。此时将S与[li, ri]合并，也就是将S更新为其与[li, ri]的并集
 
 # 方法二：将新区间加入到区间列表中，然后按照区间合并的常规方法进行合并
-# 时间复杂度：O(nlogn)
-# 空间复杂度：O(n)
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
         def merge(intervals):
