@@ -24,6 +24,7 @@ class Solution:
         return slow 
 
     def mergeTwoLists(self, list1, list2):
+        """合并两个有序链表"""
         dummy_head = ListNode()
         cur = dummy_head
         while list1 and list2:
