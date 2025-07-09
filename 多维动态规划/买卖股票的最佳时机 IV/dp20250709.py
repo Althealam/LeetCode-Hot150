@@ -21,7 +21,9 @@ class Solution:
         for i in range(1, len(prices)):
             dp[i][0] = max(dp[i-1][0], -prices[i])
             for j in range(2*k):
-                if j%2==0:
+                if j==0:
+                    dp[i][j] = max(dp[i-1][j], -prices[i])
+                elif j%2==0:
                     dp[i][j] = max(dp[i-1][j], dp[i-1][j-1]-prices[i])
                 else:
                     dp[i][j] = max(dp[i-1][j], dp[i-1][j-1]+prices[i])
